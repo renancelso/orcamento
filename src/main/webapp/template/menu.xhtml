@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:body>
+	<ui:composition>
+		
+		<div class="col-sm-3 col-md-2 sidebar">
+			<div class="nav-side-menu" id="menu">
+								
+				<ul class="nav nav-sidebar menu-titulo" style="margin-top: 5px; margin-left: 10px;">
+					<a href="..#{sessionControl.contexto}/admin" title="Página Inicial"> 
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					</a>	
+					
+					<a onclick="PF('dialogLogout').show();" href="#" title="Sair do sistema" style="float: right;"> 
+						<span class="glyphicon glyphicon-off"></span>
+					</a>								
+				</ul>								
+				
+				<h:form>
+					<p:dialog widgetVar="dialogLogout"
+							  modal="false" height="110" closable="true"
+							  width="320" resizable="false;" id="dialogLogout" 
+							  style="z-index: 9999; font-size: 14px; border: 0px; background-color: #D3E6FF !important;">		
+							  
+						<center>	
+							<h:outputText class="sessionTimer2" />
+							<br />
+							<h:outputText value="Deseja realmente sair do sistema?" 
+										  style="font-size: 14px; font-weight: bold;"/>
+							<br />						
+							<p:commandButton value="Sim" type="success" title="Sim"
+								styleClass="btn btn-success" update="@(form)"
+								style="margin-top: 10px;"
+								onclick="PF('dialogLogout').hide(); location.href = '#{sessionControl.contexto}/logoff.jsp'" />							
+			
+							<p:commandButton value="Não" type="success" title="Não"
+								styleClass="btn btn-success" update="@(form)"
+								style="margin-top: 10px; margin-left: 30px;"
+								onclick="PF('dialogLogout').hide();" />
+						</center>
+				
+					</p:dialog>	
+								
+				</h:form>
+				
+				<div class="menu-list" id="menu-list" style="font-size: 11px !important;">
+					<ul id="menu-content" class="menu-content collapse out">
+					
+<!-- 						<h:column> -->
+<!-- 							<li onclick="location.href='#{sessionControl.contexto}#{t400docu.endMenuLateralDocu}'" -->
+<!-- 								class="menuUnico"> -->
+<!-- 								<a href="#{sessionControl.contexto}#{t400docu.endMenuLateralDocu}">#{t400docu.deDoc}</a>									 -->
+<!-- 							</li> -->
+<!-- 						</h:column> -->
+	
+						<h:column>
+							<li data-toggle="collapse" onclick="modificarIcone(this,'/cadastro');"
+							    data-target="#cadastro" class="collapsed active" id="/cadastro0">		
+								<a href="#" onclick="modificarIcone(this, '/cadastro');">CADASTRO									
+									<span class="glyphicon glyphicon-plus"  
+										  id="/cadastro"
+									      style="float: right; padding: 10px 10px;">
+									</span>									      
+								</a>
+							</li>
+	
+							<ul class="sub-menu collapse" id="cadastro">	
+													
+<!-- 							<h:panelGroup rendered="#{sessionScope['usuarioLogado'].login == 'renancelso'}"> -->
+<!-- 									<li onclick="location.href='#{sessionControl.contexto}/cad-ano'" id="/cad-ano">											 -->
+<!-- 										<a href="#{sessionControl.contexto}/cad-ano">ANO</a> -->
+<!-- 									</li> -->
+<!-- 							</h:panelGroup> -->
+										
+<!-- 							<h:panelGroup rendered="#{sessionScope['usuarioLogado'].login == 'renancelso'}">						 -->
+<!-- 									<li onclick="location.href='#{sessionControl.contexto}/cad-ligas'" id="/cad-ligas">											 -->
+<!-- 										<a href="#{sessionControl.contexto}/cad-ligas">LIGAS</a> -->
+<!-- 									</li> -->
+<!-- 							</h:panelGroup>		 -->
+								
+								<li onclick="location.href='#{sessionControl.contexto}/cad-premiacoes'" id="/cad-premiacoes">											
+									<a href="#{sessionControl.contexto}/cad-premiacoes">PREMIACOES</a>
+								</li>
+								
+								<li onclick="location.href='#{sessionControl.contexto}/sincronizacao'" id="/sincronizacao">											
+									<a href="#{sessionControl.contexto}/sincronizacao">SINCRONIZAÇÃO</a>
+								</li>
+																														
+								<li onclick="location.href='#{sessionControl.contexto}/cad-times'" id="/cad-times">											
+									<a href="#{sessionControl.contexto}/cad-times">TIMES</a>
+								</li>
+								
+								<li onclick="location.href='#{sessionControl.contexto}/cad-rodadas'" id="/cad-rodadas">											
+									<a href="#{sessionControl.contexto}/cad-rodadas">RODADAS</a>
+								</li>		
+								
+								<li onclick="location.href='#{sessionControl.contexto}/rest-cartolafc'" id="/rest-cartolafc">											
+									<a href="#{sessionControl.contexto}/rest-cartolafc">RESTFUL</a>
+								</li>						
+								
+							</ul>
+							
+						</h:column>
+												
+						<h:column>
+							
+							<li data-toggle="collapse" onclick="modificarIcone(this,'/osobrevivente');"
+							    data-target="#osobrevivente" class="collapsed active" id="/osobrevivente0">								    
+								
+								<a href="#" onclick="modificarIcone(this, '/osobrevivente');">O SOBREVIVENTE									
+									<span class="glyphicon glyphicon-plus"  
+										  id="/osobrevivente"
+									      style="float: right; padding: 10px 10px;">
+									</span>									      
+								</a>
+							</li>
+	
+							<ul class="sub-menu collapse" id="osobrevivente">	
+								<li onclick="location.href='#{sessionControl.contexto}/osb-pontuacao'" id="/osb-pontuacao">											
+									<a href="#{sessionControl.contexto}/osb-pontuacao">PONTUACAO</a>
+								</li>													
+							</ul>
+							
+						</h:column>
+						
+						<h:column>
+							
+							<li data-toggle="collapse" onclick="modificarIcone(this,'/rdr');"
+							    data-target="#rdr" class="collapsed active" id="/rdr0">								    
+								
+								<a href="#" onclick="modificarIcone(this, '/rdr');">Orçamento									
+									<span class="glyphicon glyphicon-plus"  
+										  id="/rdr"
+									      style="float: right; padding: 10px 10px;">
+									</span>									      
+								</a>
+							</li>
+	
+							<ul class="sub-menu collapse" id="rdr">	
+								
+								<li onclick="location.href='#{sessionControl.contexto}/rdr-gerar-apertura'" id="/rdr-gerar-apertura">											
+									<a href="#{sessionControl.contexto}/rdr-gerar-apertura">APERTURA</a>
+								</li>	
+								
+								<li onclick="location.href='#{sessionControl.contexto}/rdr-gerar-clausura'" id="/rdr-gerar-clausura">											
+									<a href="#{sessionControl.contexto}/rdr-gerar-clausura">CLAUSURA</a>
+								</li>	
+								
+								<li onclick="location.href='#{sessionControl.contexto}/rdr-gerar-copa'" id="/rdr-gerar-copa">											
+									<a href="#{sessionControl.contexto}/rdr-gerar-copa">SUPER COPA</a>
+								</li>
+																												
+							</ul>
+							
+						</h:column>
+						
+					</ul>
+					
+				</div>
+
+			</div>
+			
+		</div>	
+		
+		<script type="text/javascript">		
+			//Mudar ícone - By Renan Celso	
+		    objAux = document.getElementById('/'+location.href.substring(location.href.lastIndexOf("/")+1));							
+
+			obj = document.getElementById('/'+objAux.parentNode.id);			
+			obj.className = '';
+ 		    obj.className = 'glyphicon glyphicon-minus';
+ 		    
+ 		    obj2 = document.getElementById('/'+objAux.parentNode.id+0);
+ 		    obj2.className = ''; 
+		    obj2.className = 'active'; 
+						
+			function modificarIcone(objeto, id) {	
+				classe = objeto.className;
+				if('collapsed active' == classe || 'active collapsed' == classe) {								
+					elemento = document.getElementById(id);
+					elemento.className = '';
+					elemento.className = 'glyphicon glyphicon-minus';
+				} else {								
+					elemento = document.getElementById(id);
+					elemento.className = '';
+					elemento.className = 'glyphicon glyphicon-plus';					
+				}
+			}
+		</script>		
+		
+	</ui:composition>
+</h:body>
+</html>

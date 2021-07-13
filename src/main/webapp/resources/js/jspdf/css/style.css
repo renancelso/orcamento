@@ -1,0 +1,23 @@
+* {
+  font-family: Lucida Sans, Arial, Helvetica, sans-serif;
+}
+body {
+  margin: 0px auto;
+  display: -webkit-flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-flex-direction: column;
+  -webkit-align-items: center;
+}
+button {
+  display: block;
+  background-color: #B4C864;
+  color: #143C14;
+  border-radius: 0.25em;
+  font-size: 20px;
+  text-align: center;
+  border: 0 none;
+  padding: 1em 2em;
+  margin: 1em;
+}

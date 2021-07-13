@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://java.sun.com/jsf/passthrough"
+	  xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie"
+      xmlns:s="http://jboss.com/products/seam/taglib"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head/>  
+ 
+<h:body>
+	
+    <ui:composition template="/template/layout.xhtml">		
+        <ui:define name="conteudo">        
+        
+            <h:form id="formPrincipal">	  			
+          		          		
+          		<b>Módulo Administrativo do Sistema</b>
+          		          		
+          		<p:growl id="messages" showDetail="false" life="4000" /> 	
+          		
+          		
+	            <p:dialog widgetVar="dialogProcessando" modal="true" 
+						  resizable="false;" draggable="false"
+					      closable="false" id="dialogProcessando" 					      
+					      style="z-index: 9999; font-size: 14px; border: 0px; background-color: #D3E6FF !important;">						     				    				
+					<center>
+						<h:outputText value="Por favor, aguarde." style="font-weight: bold; font-size: 14px;" />
+						<br/>
+						<img src="publico/estilo/images/loading.gif"/> 
+						<br/>
+					</center>						
+				</p:dialog>
+				
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+
+
+</html>

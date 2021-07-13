@@ -1,0 +1,405 @@
+/*
+ * Base structure
+ */
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+	padding-top: 86px;
+	/* Margin bottom by footer height */
+	margin-bottom: 40px;
+}
+
+
+.form-horizontal {
+	 width: 100%;
+}
+
+/*
+ * Global add-ons
+ */
+.sub-header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+
+.obrigatorio {
+	color: red;
+}
+
+.col-md-2 {
+	/**width: 215px !important;**/
+}
+
+/*
+  * CABECALHO
+  */
+
+/* .navbar-nav>li>a */
+.item-header>ul>li>a {
+	padding-top: 22px;
+	padding-bottom: 22px;
+}
+
+.navbar-fixed-top {
+	/*border: 0;*/
+	background-color: #9DBEDD; 			
+}
+
+.topbar {
+	height: 27px;
+	background-color: #D3E6FF;
+	
+}
+
+.breadcrumb {
+	padding: 8px 15px;
+	margin-bottom: 15px;
+	list-style: none;
+	background-color: #FFFFFF;
+}
+
+.breadcrumb>li+li:before {
+	padding: 0 5px;
+	color: #ccc;
+	content: "\203A";
+}
+
+ol {
+	border-bottom: 2px solid #FDC246;
+}
+
+.voce {
+	font-family: Tahoma;
+	font-size: 9px;
+	color: #666666;
+}
+
+/*
+ * MENU SIDEBAR
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+	display: none;
+}
+
+/*@media ( min-width : 1px) {*/
+	.sidebar {
+		position: fixed;
+		top: 80px;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		display: block;
+		padding: 20px;
+		overflow-x: hidden;
+		overflow-y: auto;
+		/* Scrollable contents if viewport is shorter than content. */
+		background-color: #FFFFFF; /* #EFEFF1;*/
+		border-right: 1px dotted #eee;
+		position: fixed;
+	}
+/*}*/
+
+/* Sidebar navigation */
+
+/* Menu (T�tulo) */
+.nav-sidebar {
+	margin-right: -21px; /* 20px padding + 1px border */
+	margin-bottom: 20px;
+	margin-left: -20px;
+}
+
+.nav-sidebar>li>a {
+	padding-right: 20px;
+	padding-left: 20px;
+	border-top-style: dotted;
+	border-top-color: #52514F;
+	border-top-width: 2px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+.nav-sidebar>li>a:link {
+	font-size: 11px;
+	color: #9DBEDD;
+	text-decoration: none;
+}
+
+.nav-sidebar>.active {
+	text-align: center;
+	color: #666666;
+}
+
+.nav-sidebar>li>a {
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+.nav-sidebar>.active>a, .nav-sidebar>.active>a:hover, .nav-sidebar>.active>a:focus
+	{
+	font-size: 11px;
+	color: #666666;
+}
+
+.nav-sidebar>li>a:hover, .nav-sidebar>li>a:focus {
+	font-size: 11px;
+	color: #666666;
+}
+
+.nav-sidebar>li>a:visited {
+	font-size: 11px;
+	color: #9DBEDD;
+	text-decoration: none;
+}
+
+/*
+ * CONTEUDO
+ */
+.main {
+	padding: 87px;
+	padding-top: 1px;	
+}
+
+@media ( min-width : 768px) {
+	.main {
+		padding-right: 40px !important;
+		padding-left: 40px !important;
+	}
+}
+
+@media ( min-width : 1024px) {
+	.main {
+		padding-right: 50px !important;
+		padding-left: 50px !important;
+	}
+}
+
+@media ( min-width : 1360px) {
+	.main {
+		padding-right: 15px !important;
+		padding-left: 15px !important;
+	}
+}
+
+@media (max-width : 767px) {
+	.main {
+		padding-right: 235px !important;
+		padding-left: 235px !important;
+	}
+	.voce{
+		display: none;
+	}
+}
+
+.main .page-header {
+	margin-top: 0;
+}
+
+.page-header {
+	
+}
+
+/*
+ * Placeholder dashboard ideas
+ */
+.placeholders {
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.placeholders h4 {
+	margin-bottom: 0;
+}
+
+.placeholder {
+	margin-bottom: 20px;
+}
+
+.placeholder img {
+	display: inline-block;
+	border-radius: 50%;
+}
+
+/*
+ * RODAPE
+ */
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 20px;
+	background-color: #f5f5f5;
+	font-family: Tahoma;
+	font-size: 11px;
+	text-align: center;
+	color: #666666;
+}
+
+.sessionTimer {
+	color: #1A1C6F;	
+	font-family: Tahoma;
+	font-weight: normal;
+	font-size: 11px;	
+}
+
+.userLogado {
+	color: #000000;
+	/*font-weight: bold;*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 12px;	
+}
+
+.sessionTimer2{
+	color: red;
+	font-weight: bold;
+	font-family: Tahoma;
+	font-size: 12px;
+}
+
+.coluna1D {
+	/*font-family:Tahoma;
+	font-size:12px;*/
+	font-weight:bold;
+	color:#333333;
+	padding: 3px 3px;
+	text-align: right;
+	/*border:0px;
+	background:#e8e7e7;*/
+}
+
+
+.coluna1 {
+	/*font-family:Tahoma;
+	font-size:12px;*/
+	font-weight:bold;
+	color:#333333;
+	padding: 3px 3px;
+	/*border:0px;
+	background:#e8e7e7;*/
+}
+	
+.coluna2 {	
+	/*font-family:Tahoma;
+	font-size:12px;*/
+	color: #000000;
+	text-align:left;
+	padding: 3px 3px;
+}
+
+.ajax-loader{
+	margin-top: -20px;
+	margin-right: 10px;
+	text-align: right;	
+}
+
+.glyphicon:hover{
+	color: #FDC246;
+}
+
+.nav-side-menu li {
+  font-weight: bold;
+  padding-left: 0px;
+  border-left: 3px solid #9DBEDD; 
+  border-bottom: 2px dotted #52514F;
+  background-color: #FFFFFF;
+}
+
+
+.nav-side-menu ul .active:hover , .nav-side-menu li .active:hover {
+	background-color: #9DBEDD;	
+}
+
+.nav-side-menu ul .active:hover a, .nav-side-menu li .active:hover a{	
+	color: #FFFFFF;	
+}
+
+.nav-side-menu ul .menuUnico:hover , .nav-side-menu li .menuUnico:hover {
+	background-color: #9DBEDD;	
+}
+
+.nav-side-menu ul .menuUnico:hover a, .nav-side-menu li .menuUnico:hover a{	
+	color: #FFFFFF;	
+}
+
+.menuSelecionado{
+	background-color: #9DBEDD !important;	
+	color: #FFFFFF !important;
+}
+
+.btn{
+	text-align: right;
+	margin-right: 0.8em;
+	background-color: #9DBEDD;
+	color: #FFFFFF;	
+}
+
+@media(max-width: 758px){
+	
+	.pull-left {
+		display: none !important;;
+	}
+	
+	.voce{
+		display: none;
+	}	
+			
+}
+
+.pull-right2 {
+	float: right; 	
+	display: block;
+	margin-top: 35px;
+}
+
+@media(min-width: 1050px){
+	.infoLogin{
+		display: none;
+	}
+}
+
+.direita {
+	text-align: right;	
+}
+	
+.esquerda {			
+	text-align:left;	
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	background: #9DBEDD;
+	color: #000000;
+	text-shadow: 0px 0px 0px #333333;
+	
+}
+
+.ui-selectonelistbox .ui-selectlistbox-item, .ui-selectmanymenu .ui-selectlistbox-item, .ui-multiselectlistbox .ui-multiselectlistbox-item {
+	margin: 2px;
+    border: 3px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.ui-chkbox .ui-chkbox-box {
+	width: 16px;
+    height: 16px;
+    display: inline-block;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+.ui-picklist .ui-picklist-list{
+	height:300px;
+	width: 300px
+}
+

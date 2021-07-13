@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	  
+<h:body>
+
+	<ui:composition>
+	
+		<div class="navbar-header">	
+			<a href="inicio" class="logo"><img src="#{sessionControl.logoLiga}" alt="" style="height: 53px; margin-left: -10px; margin-top: -1px;"/></a>
+        </div>      
+        
+        <div class="pull-right">
+        	<img src="publico/estilo/images/brasaoTJPA-Logo.png" alt="" style="width: 50px; margin-bottom: 2px;"/>							
+		</div>  				             
+        
+        <div class="pull-right2">
+        
+	        <p:ajaxStatus onstart="resetTimerCounter();" styleClass="ajax-loader" style="display: block;">													
+				<f:facet name="start">  					
+			        <img src="publico/estilo/images/loading.gif" style="display: block; height: 30px;"/> 
+			    </f:facet>								    
+			    <f:facet name="error">  
+			        <h:outputText value="" />  
+			    </f:facet> 
+			    <f:facet name="sucess">  
+			        <h:outputText value="" />  
+			    </f:facet> 
+			    <f:facet name="complete">  
+			        <h:outputText value="" />  
+			    </f:facet>  								
+			</p:ajaxStatus>	 
+        		        
+        </div>	
+            		
+	</ui:composition>
+</h:body>
+</html>

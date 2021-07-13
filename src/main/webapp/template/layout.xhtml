@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h:head>
+	<link rel="shortcut icon" href="#{sessionControl.logoLiga}" />
+	<link rel="stylesheet" type="text/css" href="resources/js/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/estilo.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/menu.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/padrao.css" />
+	<title>Orçamento - Admin</title>
+	
+	<script type="text/javascript">
+        function scrollWindow()
+        {        	
+            window.scrollTo(0,0);
+        }
+    </script>
+
+	<script type="text/javascript">		
+		scrollWindow();
+		/**		
+		 * 
+		 * Manter o menu relacionado a tela que está sendo usada selecionado.
+		 *
+		 * @author Renan Celso
+		 *
+		 */
+		var path = '${sessionControl.contexto}';
+		$(document).ready(function(){	
+			$("li a[href='"+path+"/"+location.href.substring(location.href.lastIndexOf("/")+1,255)+"']").addClass("menuSelecionado");
+			$("li a[href='"+path+"/"+location.href.substring(location.href.lastIndexOf("/")+1,255)+"']").parent().addClass("menuSelecionado");
+			$("li a[href='"+path+"/"+location.href.substring(location.href.lastIndexOf("/")+1,255)+"']").parent().parent().removeClass("sub-menu collapse");
+			$("li a[href='"+path+"/"+location.href.substring(location.href.lastIndexOf("/")+1,255)+"']").parent().parent().addClass("sub-menu collapse in");
+		});
+		
+	   /**		 
+		* Contador do tempo de sessão do usuário.
+		*
+		* @author Renan Celso, em 12/06/2015
+		*
+		*/			
+		var sessionTimeout = ${sessionControl.sessionTimeout/1000};
+		var timeoutDate = Date.now();		
+		resetTimerCounter();		
+				
+		function resetTimerCounter(){
+			sessionTimeout = ${sessionControl.sessionTimeout/1000};
+			timeoutDate = Date.now();
+			timeoutDate += sessionTimeout*1000;
+			timeoutDate = new Date(timeoutDate);
+			if(${sessionControl.usuarioLogado() != null}){
+				contarTempo();		
+			}
+		}
+
+		function contarTempo(){	
+			var expirou = false;		
+			if(timeoutDate != null){				
+				var currDateTimeout = timeoutDate - Date.now();
+				currDateTimeout = new Date(currDateTimeout);
+				var minutes = currDateTimeout.getMinutes();				
+				var seconds = currDateTimeout.getSeconds();
+
+				if(minutes == 1) {
+					if(seconds == 0) {
+						PF('dialogSessaoVaiExpirar').show();
+					}
+				}
+								
+				if(Date.now() > timeoutDate-1){
+					minutes = 0;
+					seconds = 0;			
+					logout();
+					expirou = true;						
+				}
+				$('.sessionTimer').text("Sua sessão expira em "+(minutes>=10?minutes:'0'+minutes)+':'+(seconds>=10?seconds:'0'+seconds)+" minutos");
+				$('.sessionTimer2').text("Sua sessão expira em "+(minutes>=10?minutes:'0'+minutes)+':'+(seconds>=10?seconds:'0'+seconds)+" minutos");
+			}
+			
+			if(!expirou){
+				funcaoTimeout=setTimeout("contarTempo()",1000);		
+			}	
+		};
+
+		function logout(){			
+			PF('dialogSessaoVaiExpirar').hide();
+	    	PF('dialogSessaoExpirada').show();
+		}
+			
+	</script>
+</h:head>
+
+<h:body>
+
+	<h:form id="formDialogs">
+
+		<p:dialog header="Sessão Expirada" widgetVar="dialogSessaoExpirada"
+			modal="true" height="130" draggable="false"
+			width="300" resizable="false;" closable="false"
+			id="dialogSessaoExpirada" style="z-index: 9999;">
+
+			<center>
+				<br />
+				<h:outputText value="Sua sessão expirou!" />
+				<br />
+				<h:outputText value="É necessário logar novamente." />
+				<br />
+				
+				<p:commandButton value="Login" type="success"
+					title="Ir para tela de Login" styleClass="btn btn-success"
+					ajax="false" update="@(form)" style="margin-top: 10px;"
+					onclick="PF('dialogSessaoExpirada').hide();" 
+					action="#{sessionControl.deslogar()}"/>					
+					
+			</center>
+
+		</p:dialog>
+
+		<p:dialog header="Sessão Expirando" widgetVar="dialogSessaoVaiExpirar"
+			modal="true" height="130" draggable="false"
+			width="300" resizable="false;" closable="false"
+			id="dialogSessaoVaiExpirar" 
+			style="z-index: 9999; font-size: 14px; border: 0px; background-color: #D3E6FF !important;">
+
+			<center>
+				<h:outputText class="sessionTimer2" />
+				<br />
+				<h:outputText value="Deseja renovar a sessão?" />
+				<br />
+				<p:commandButton value="Sim" type="success" title="Sim"
+					styleClass="btn btn-success" ajax="false" update="@(form)"
+					style="margin-top: 10px;"
+					onclick="PF('dialogSessaoVaiExpirar').hide();"
+					action="#{sessionControl.renovarSessao()}" />
+
+				<p:commandButton value="Não" type="success" title="Não"
+					styleClass="btn btn-success" ajax="false" update="@(form)"
+					style="margin-top: 10px; margin-left: 30px;"
+					onclick="PF('dialogSessaoVaiExpirar').hide();"
+					action="#{sessionControl.invalidateSession()}" />
+			</center>
+
+		</p:dialog>
+
+	</h:form>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="container-fluid imagem-cabecalho">
+			<ui:insert name="header">
+				<ui:include src="/template/cabecalho.xhtml" />
+			</ui:insert>
+		</div>
+		
+		<div class="container-fluid topbar">				
+			
+			<h:outputText style="color: #1A1C6F; font-weight: bold; line-height: 2.5;" 
+						 class="userLogado" value="OLÁ #{sessionScope['usuarioLogado'].login.toUpperCase()}"/>
+			
+			<div class="pull-right">
+				
+				<h:outputText class="sessionTimer" style="font-weight: bold; line-height: 2.5;" />	
+				
+				<p:spacer width="10"/>
+				
+				<a onclick="PF('dialogLogout').show();" href="#" title="Sair do sistema" style="line-height: 2.5;"> 
+					<span class="glyphicon glyphicon-off" style="font-size: 16px;"></span>
+				</a>	
+				
+				<p:spacer width="5"/>				
+				
+			</div>
+			
+		</div>		
+		
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">			
+			<ui:insert name="menu">
+				<ui:include src="/template/menu.xhtml" />
+			</ui:insert>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">				
+				<ui:insert name="conteudo"></ui:insert>
+			</div>
+		</div>
+	</div>
+
+	<ui:insert name="header">
+		<ui:include src="/template/rodape.xhtml" />
+	</ui:insert>
+	<!-- Colocado no final do documento para que as páginas carreguem mais rápido -->
+
+	<!-- 	<h:outputScript name="js/jquery/jquery.min.js" /> -->
+	<h:outputScript name="js/bootstrap/js/bootstrap.min.js" />
+		
+	<h:outputScript name="js/geral.js" />
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<h:outputScript name="js/ie/ie10-viewport-bug-workaround.js" />
+
+	<h:outputScript name="js/app.js" />	
+	
+	<h:outputScript name="js/access/icpbravo.access_1.0.7.js" />
+	<h:outputScript name="js/access/icpbravo.access.ext.js" />
+	<h:outputScript name="js/access/icpbravo.access.port.js" />
+
+</h:body>
+</html>
