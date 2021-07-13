@@ -41,12 +41,12 @@ public class Usuario implements Serializable {
 	private String telefone;
 		
 	/**
-	 * Administrador	 
+	 * 1 - administrador	
+	 * 2 - arquiteto
 	 */
 	@Column(name = "tipoUsuario", nullable = false, length=255)
 	private String tipoUsuario;
-		
-	
+			
 	@Column(name = "dh_atu")   
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dhAtu;	

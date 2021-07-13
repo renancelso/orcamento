@@ -5,18 +5,32 @@
 	<url-mapping id="inicio">
         <pattern value="/" />
         <view-id value="/publico/inicio.jsf" />
-    </url-mapping>	  
+    </url-mapping>	 
     
     <url-mapping id="inicio0">
         <pattern value="/inicio" />
         <view-id value="/publico/inicio.jsf" />
-    </url-mapping>	    
+    </url-mapping>   
     
-    <url-mapping id="login">
-        <pattern value="/login" />
-        <view-id value="/publico/login.jsf" />
-    </url-mapping>	 
+    <url-mapping id="admin">
+        <pattern value="/admin" />
+        <view-id value="/sistema/admin.jsf" />
+    </url-mapping>  
     
+    <url-mapping id="cad-servico">
+        <pattern value="/cad-servico" />
+        <view-id value="/sistema/cad-servico.jsf" />
+    </url-mapping>  
+    
+    <url-mapping id="cad-coluna">
+        <pattern value="/cad-coluna" />
+        <view-id value="/sistema/cad-coluna.jsf" />
+    </url-mapping>  
+    
+    <url-mapping id="cad-valores">
+        <pattern value="/cad-valores" />
+        <view-id value="/sistema/cad-valores.jsf" />
+    </url-mapping>      
               
    	<url-mapping id="logoff">
 	  	<pattern value="/logoff" />

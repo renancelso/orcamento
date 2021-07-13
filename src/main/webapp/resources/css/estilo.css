@@ -47,12 +47,12 @@ body {
 
 .navbar-fixed-top {
 	/*border: 0;*/
-	background-color: #9DBEDD; 			
+	background-color: #FFFFFF; 			
 }
 
 .topbar {
 	height: 27px;
-	background-color: #D3E6FF;
+	background-color: #A4A4A4;
 	
 }
 
@@ -243,7 +243,7 @@ ol {
 }
 
 .sessionTimer {
-	color: #1A1C6F;	
+	/*color: #1A1C6F;*/	
 	font-family: Tahoma;
 	font-weight: normal;
 	font-size: 11px;	

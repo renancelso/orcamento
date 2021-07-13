@@ -61,6 +61,7 @@
 <!-- 						</h:column> -->
 	
 						<h:column>
+							
 							<li data-toggle="collapse" onclick="modificarIcone(this,'/cadastro');"
 							    data-target="#cadastro" class="collapsed active" id="/cadastro0">		
 								<a href="#" onclick="modificarIcone(this, '/cadastro');">CADASTRO									
@@ -73,94 +74,32 @@
 	
 							<ul class="sub-menu collapse" id="cadastro">	
 													
-<!-- 							<h:panelGroup rendered="#{sessionScope['usuarioLogado'].login == 'renancelso'}"> -->
-<!-- 									<li onclick="location.href='#{sessionControl.contexto}/cad-ano'" id="/cad-ano">											 -->
-<!-- 										<a href="#{sessionControl.contexto}/cad-ano">ANO</a> -->
-<!-- 									</li> -->
-<!-- 							</h:panelGroup> -->
-										
-<!-- 							<h:panelGroup rendered="#{sessionScope['usuarioLogado'].login == 'renancelso'}">						 -->
-<!-- 									<li onclick="location.href='#{sessionControl.contexto}/cad-ligas'" id="/cad-ligas">											 -->
-<!-- 										<a href="#{sessionControl.contexto}/cad-ligas">LIGAS</a> -->
-<!-- 									</li> -->
-<!-- 							</h:panelGroup>		 -->
+								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
+									<li onclick="location.href='#{sessionControl.contexto}/cad-servico'" id="/cad-servico">											
+										<a href="#{sessionControl.contexto}/cad-servico">SERVIÇO</a>
+									</li>
+								</h:panelGroup>			
 								
-								<li onclick="location.href='#{sessionControl.contexto}/cad-premiacoes'" id="/cad-premiacoes">											
-									<a href="#{sessionControl.contexto}/cad-premiacoes">PREMIACOES</a>
-								</li>
+													
+								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
+									<li onclick="location.href='#{sessionControl.contexto}/cad-coluna'" id="/cad-coluna">											
+										<a href="#{sessionControl.contexto}/cad-coluna">COLUNA</a>
+									</li>
+								</h:panelGroup>	
 								
-								<li onclick="location.href='#{sessionControl.contexto}/sincronizacao'" id="/sincronizacao">											
-									<a href="#{sessionControl.contexto}/sincronizacao">SINCRONIZAÇÃO</a>
-								</li>
-																														
-								<li onclick="location.href='#{sessionControl.contexto}/cad-times'" id="/cad-times">											
-									<a href="#{sessionControl.contexto}/cad-times">TIMES</a>
-								</li>
-								
-								<li onclick="location.href='#{sessionControl.contexto}/cad-rodadas'" id="/cad-rodadas">											
-									<a href="#{sessionControl.contexto}/cad-rodadas">RODADAS</a>
-								</li>		
-								
-								<li onclick="location.href='#{sessionControl.contexto}/rest-cartolafc'" id="/rest-cartolafc">											
-									<a href="#{sessionControl.contexto}/rest-cartolafc">RESTFUL</a>
-								</li>						
+								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
+									<li onclick="location.href='#{sessionControl.contexto}/cad-valores'" id="/cad-valores">											
+										<a href="#{sessionControl.contexto}/cad-valores">VALORES</a>
+									</li>
+								</h:panelGroup>
+							
+									
 								
 							</ul>
 							
 						</h:column>
+											
 												
-						<h:column>
-							
-							<li data-toggle="collapse" onclick="modificarIcone(this,'/osobrevivente');"
-							    data-target="#osobrevivente" class="collapsed active" id="/osobrevivente0">								    
-								
-								<a href="#" onclick="modificarIcone(this, '/osobrevivente');">O SOBREVIVENTE									
-									<span class="glyphicon glyphicon-plus"  
-										  id="/osobrevivente"
-									      style="float: right; padding: 10px 10px;">
-									</span>									      
-								</a>
-							</li>
-	
-							<ul class="sub-menu collapse" id="osobrevivente">	
-								<li onclick="location.href='#{sessionControl.contexto}/osb-pontuacao'" id="/osb-pontuacao">											
-									<a href="#{sessionControl.contexto}/osb-pontuacao">PONTUACAO</a>
-								</li>													
-							</ul>
-							
-						</h:column>
-						
-						<h:column>
-							
-							<li data-toggle="collapse" onclick="modificarIcone(this,'/rdr');"
-							    data-target="#rdr" class="collapsed active" id="/rdr0">								    
-								
-								<a href="#" onclick="modificarIcone(this, '/rdr');">Orçamento									
-									<span class="glyphicon glyphicon-plus"  
-										  id="/rdr"
-									      style="float: right; padding: 10px 10px;">
-									</span>									      
-								</a>
-							</li>
-	
-							<ul class="sub-menu collapse" id="rdr">	
-								
-								<li onclick="location.href='#{sessionControl.contexto}/rdr-gerar-apertura'" id="/rdr-gerar-apertura">											
-									<a href="#{sessionControl.contexto}/rdr-gerar-apertura">APERTURA</a>
-								</li>	
-								
-								<li onclick="location.href='#{sessionControl.contexto}/rdr-gerar-clausura'" id="/rdr-gerar-clausura">											
-									<a href="#{sessionControl.contexto}/rdr-gerar-clausura">CLAUSURA</a>
-								</li>	
-								
-								<li onclick="location.href='#{sessionControl.contexto}/rdr-gerar-copa'" id="/rdr-gerar-copa">											
-									<a href="#{sessionControl.contexto}/rdr-gerar-copa">SUPER COPA</a>
-								</li>
-																												
-							</ul>
-							
-						</h:column>
-						
 					</ul>
 					
 				</div>

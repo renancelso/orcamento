@@ -11,7 +11,7 @@
 	<% 
     	session.setAttribute("usuarioLogado", null); 
     	session.invalidate(); 
-    	response.sendRedirect("login");        	
+    	response.sendRedirect("inicio");        	
     %>		
 	</body>
 </html>
