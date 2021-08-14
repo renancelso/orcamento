@@ -1,7 +1,7 @@
 package br.com.orcamento.control;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -85,7 +85,7 @@ public class LoginControl extends BaseControl {
 				return null;
 			}
 
-			novoUsuario.setDhAtu(new Date());
+			novoUsuario.setDhAtu(LocalDateTime.now());
 			novoUsuario = (Usuario) loginService.atualizar(novoUsuario);
 
 			addInfoMessage("Usuário " + novoUsuario.getLogin() + " cadastrado com sucesso");

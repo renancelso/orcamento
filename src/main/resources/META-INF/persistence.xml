@@ -7,6 +7,8 @@
 		<jta-data-source>java:/jdbc/orcamentoDS</jta-data-source>
 		
 		<class>br.com.orcamento.model.Usuario</class>
+		<class>br.com.orcamento.model.Servico</class>
+		<class>br.com.orcamento.model.Valores</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>NONE</shared-cache-mode>			
@@ -18,9 +20,9 @@
 			<property name="hibernate.format_sql" value="false" />  
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>			
 			<property name="hibernate.connection.characterEncoding" value="UTF-8" />
-<!-- 		<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/orcamento"/> -->
-<!-- 		<property name="hibernate.connection.username" value="root"/> 				 			  -->
-<!-- 		<property name="hibernate.connection.password" value="123456"/>				 			  -->
+	 	<!-- 	<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/orcamento_bd"/>
+	 		<property name="hibernate.connection.username" value="root"/> 				 			  
+	 		<property name="hibernate.connection.password" value="1234"/>	 -->			 			  
 		</properties>
 		
 	</persistence-unit>	

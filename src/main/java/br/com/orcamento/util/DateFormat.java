@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * @author Renan Celso
@@ -26,13 +25,11 @@ public class DateFormat implements Serializable{
 		return new SimpleDateFormat(formato).format(data);
 	}
 
-	public static Date dataXMLGregCal(XMLGregorianCalendar xmlGC) {
-		if (xmlGC == null) {
-			return null;
-		} else {
-			return xmlGC.toGregorianCalendar().getTime();
-		}
-	}
+	/*
+	 * public static <XMLGregorianCalendar> Date dataXMLGregCal(XMLGregorianCalendar
+	 * xmlGC) { if (xmlGC == null) { return null; } else { return
+	 * xmlGC.toGregorianCalendar().getTime(); } }
+	 */
 	
 	
 
