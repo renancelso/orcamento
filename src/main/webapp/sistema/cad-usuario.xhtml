@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pt="http://java.sun.com/jsf/passthrough"
+	  xmlns:c="http://java.sun.com/jstl/core" class="gt-ie8 gt-ie9 not-ie"
+      xmlns:s="http://jboss.com/products/seam/taglib"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head/>  
+ 
+<h:body>
+	
+    <ui:composition template="/template/layout.xhtml">		
+        <ui:define name="conteudo">        
+        
+            <h:form id="formPrincipal">	   
+            
+            	<p:messages id="messages" closable="true" showDetail="false">
+          			<p:autoUpdate />
+          		</p:messages>	         		
+          		
+          		<p:panel header="Cadastro de Usuário" style="min-width: 515px; font-size: 12px;">
+          		
+	          		<h:panelGroup rendered="#{usuarioControl.novoUsuario != null and usuarioControl.usuarioSelecionado == null}">
+	          			
+	          			<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	  
+	          			
+	          				<h:outputText value="Tipo de Usuário " class="required"/>	        			
+			        		<h:selectOneMenu value="#{usuarioControl.novoUsuario.tipoUsuario}">	
+			        			<f:selectItem itemValue="" itemLabel="----- SELECIONE -----"/>	
+			        			<f:selectItem itemValue="ARQUITETO" itemLabel="ARQUITETO"/>	
+		        				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="ADMINISTRADOR"/>															
+							</h:selectOneMenu>			    
+	          						        		
+			        		<h:outputText value="Email "/>	        			
+			        		<h:inputText size="40" value="#{usuarioControl.novoUsuario.email}"/>  
+			        		
+			        		<h:outputText value="Telefone " />	        			
+			        		<h:inputText size="15" onkeypress="mascara(this, telefone)" maxlength="14"
+			        					 value="#{usuarioControl.novoUsuario.telefone}"/>  
+			        					           				          				
+	          				<h:outputText value="Login " class="required"/>	        			
+			        		<h:inputText size="30" value="#{usuarioControl.novoUsuario.login}"/>
+			        		
+			        		<h:outputText value="Senha " class="required"/>	        			
+			        		<h:inputSecret size="20" value="#{usuarioControl.novoUsuario.senha}"/>  
+			        		
+			        		<h:outputText value="Confirmação de Senha " class="required"/>	        			
+			        		<h:inputSecret size="20" value="#{usuarioControl.senhaConfirmacao}"/>           			 
+	          			
+	          			</h:panelGrid>  
+	          			        			
+	          			<br/>
+	          				
+					</h:panelGroup>
+					 
+					<h:panelGroup rendered="#{usuarioControl.novoUsuario == null and usuarioControl.usuarioSelecionado != null}">
+						
+						<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	  
+	          			
+	          				<h:outputText value="Tipo de Usuário " class="required"/>	        			
+			        		<h:selectOneMenu value="#{usuarioControl.usuarioSelecionado.tipoUsuario}">	
+			        			<f:selectItem itemValue="" itemLabel="...SELECIONE..."/>	
+			        			<f:selectItem itemValue="ARQUITETO" itemLabel="ARQUITETO"/>	
+		        				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="ADMINISTRADOR"/>															
+							</h:selectOneMenu>			    
+	          						        		
+			        		<h:outputText value="Email "/>	        			
+			        		<h:inputText size="40" value="#{usuarioControl.usuarioSelecionado.email}"/>  
+			        		
+			        		<h:outputText value="Telefone " />	        			
+			        		<h:inputText size="15" onkeypress="mascara(this, telefone)" maxlength="14"
+			        					 value="#{usuarioControl.usuarioSelecionado.telefone}"/>  
+			        					           				          				
+	          				<h:outputText value="Login " class="required"/>	        			
+			        		<h:inputText size="30" value="#{usuarioControl.usuarioSelecionado.login}"/>
+			        		
+			        		<h:outputText value="Senha " class="required"/>	        			
+			        		<h:inputSecret size="20" value="#{usuarioControl.usuarioSelecionado.senha}"/>  
+			        		
+			        		<h:outputText value="Confirmação de Senha " class="required"/>	        			
+			        		<h:inputSecret size="20" value="#{usuarioControl.senhaConfirmacao}"/>           			 
+	          			
+	          			</h:panelGrid>  
+	          			        			
+	          			<br/>
+					 
+					</h:panelGroup>				 
+				   		
+			    <h:panelGrid columns="6" columnClasses="coluna1D,coluna2">	 
+			    	
+				    <p:spacer width="135" height="0"/>  											    	
+				    	
+				    <p:commandButton value="CADASTRAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnCadastrar"
+								 	 action="#{usuarioControl.btnCadastrarNovoUsuario}"
+								 	 rendered="#{usuarioControl.novoUsuario != null and usuarioControl.usuarioSelecionado == null}"/>
+								 	 
+					<p:commandButton value="ALTERAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnAlterar"
+								 	 rendered="#{usuarioControl.novoUsuario == null and usuarioControl.usuarioSelecionado != null}"/>								 	 
+								 	 
+						
+					<p:spacer width="20" height="0" rendered="#{usuarioControl.novoUsuario == null and usuarioControl.usuarioSelecionado != null}"/>  		 		 
+								 		 
+					<p:commandButton value="EXCLUIR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnExcluir"
+							 		 action="#{usuarioControl.btnExcluirUsuario}"
+							 		 rendered="#{usuarioControl.novoUsuario == null and usuarioControl.usuarioSelecionado != null}"/>
+					
+					<p:spacer width="20" height="0"/>  		 		 		 
+							 		 
+					<p:commandButton value="LIMPAR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnLimpar"
+							 		 action="#{usuarioControl.init}"/>
+						 		 
+				</h:panelGrid>
+          		
+          	 	</p:panel>   
+          	 	
+          	 	<p:dataTable var="item" value="#{usuarioControl.listaUsuarios}" 
+	            			 selectionMode="single" rowKey="#{item.id}"
+	            			 reflow="true" id="listaUsuarios"	   
+	            			 style="min-width: 250px; font-size: 12px;"
+	            			 paginator="true" widgetVar="listaUsuarios"
+	            			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	            			 currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} de um total de {totalRecords} registros"  
+	       			 		 emptyMessage="Não existem dados cadastrados">
+	       			
+	       			<p:ajax event="rowDblselect" update="@form" 
+	       					oncomplete="window.scrollTo(0,0);"
+	       					listener="#{usuarioControl.onRowSelect}" />  
+	       					 
+	       			<p:column headerText="Login" style="width: 20%"	       						    
+	       					  filterBy="#{item.login}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.login}" />
+				    </p:column>		
+				    
+				    <p:column headerText="Email" style="width: 20%"
+				     	      filterBy="#{item.email}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.email}" />
+				    </p:column>		
+				    
+				    <p:column headerText="Telefone" style="width: 20%"
+				     	      filterBy="#{item.telefone}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.telefone}" />
+				    </p:column>	
+				    
+				    <p:column headerText="Tipo" style="width: 20%"				    
+	       					  filterBy="#{item.tipoUsuario}" filterMatchMode="exact">	
+				    	<f:facet name="filter">
+			                <p:selectOneMenu onchange="PF('listaUsuarios').filter()" styleClass="custom-filter">
+			                   	<f:selectItem itemValue="" itemLabel="TODOS"/>	
+			        		   	<f:selectItem itemValue="ARQUITETO" itemLabel="ARQUITETO"/>	
+		        				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="ADMINISTRADOR"/>		
+			                </p:selectOneMenu>
+			            </f:facet>
+				    			       
+				        <h:outputText value="#{item.tipoUsuario}" />
+				    </p:column>			    
+				    								   
+				</p:dataTable>            	
+          		          		
+	            <p:dialog widgetVar="dialogProcessando" modal="true" 
+						  resizable="false;" draggable="false"
+					      closable="false" id="dialogProcessando" 					      
+					      style="z-index: 9999; font-size: 14px; border: 0px; background-color: #D3E6FF !important;">						     				    				
+					<center>
+						<h:outputText value="Por favor, aguarde." style="font-weight: bold; font-size: 14px;" />
+						<br/>
+						<img src="publico/estilo/images/loading.gif"/> 
+						<br/>
+					</center>						
+				</p:dialog>
+				
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+
+
+</html>

@@ -73,13 +73,18 @@
 							</li>
 	
 							<ul class="sub-menu collapse" id="cadastro">	
+							
+								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
+									<li onclick="location.href='#{sessionControl.contexto}/cad-usuario'" id="/cad-usuario">											
+										<a href="#{sessionControl.contexto}/cad-usuario">USUARIO</a>
+									</li>
+								</h:panelGroup>
 													
 								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
 									<li onclick="location.href='#{sessionControl.contexto}/cad-servico'" id="/cad-servico">											
 										<a href="#{sessionControl.contexto}/cad-servico">SERVIÇO</a>
 									</li>
-								</h:panelGroup>			
-								
+								</h:panelGroup>		
 													
 								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
 									<li onclick="location.href='#{sessionControl.contexto}/cad-coluna'" id="/cad-coluna">											
@@ -88,12 +93,16 @@
 								</h:panelGroup>	
 								
 								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
+									<li onclick="location.href='#{sessionControl.contexto}/cad-taxas'" id="/cad-taxas">											
+										<a href="#{sessionControl.contexto}/cad-taxas">TAXAS</a>
+									</li>
+								</h:panelGroup>	
+								
+								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
 									<li onclick="location.href='#{sessionControl.contexto}/cad-valores'" id="/cad-valores">											
 										<a href="#{sessionControl.contexto}/cad-valores">VALORES</a>
 									</li>
 								</h:panelGroup>
-							
-									
 								
 							</ul>
 							

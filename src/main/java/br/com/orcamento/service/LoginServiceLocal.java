@@ -13,6 +13,6 @@ import br.com.orcamento.padrao.GenericServiceInterface;
 @Local
 public interface LoginServiceLocal extends GenericServiceInterface{
 
-	public List<Usuario> buscarUsuarioPorLogin(String email);
+	public List<Usuario> buscarUsuarioPorLogin(String login);
 
 }
