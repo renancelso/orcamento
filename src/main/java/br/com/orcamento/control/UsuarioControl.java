@@ -116,47 +116,42 @@ public class UsuarioControl extends BaseControl {
 	
 	public String btnAlterarUsuario() {
 		try {
-
-			if (usuarioSelecionado.getTipoUsuario() == null || "".equalsIgnoreCase(usuarioSelecionado.getTipoUsuario())) {
-				addErrorMessage("É necessário informar o tipo de usuário.");
-				usuarioSelecionado.setSenha("");
-				senhaConfirmacao = "";
-				return null;
-			}
-
-			if ("".equalsIgnoreCase(usuarioSelecionado.getLogin()) || "".equalsIgnoreCase(usuarioSelecionado.getSenha())
-					|| "".equalsIgnoreCase(senhaConfirmacao)) {
-				addErrorMessage("Os campos login e senha são obrigatórios. Favor preenchê-los.");
-				usuarioSelecionado.setSenha("");
-				senhaConfirmacao = "";
-				return null;
-			}
-
-			if (!usuarioSelecionado.getSenha().equals(Md5.getMd5Digest(senhaConfirmacao))) {
-				addErrorMessage("Senha e confirmação se senha não conferem.");
-				usuarioSelecionado.setSenha("");
-				senhaConfirmacao = "";
-				return null;
-			}
-
-			List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-			listaUsuarios = loginService.buscarUsuarioPorLogin(usuarioSelecionado.getLogin());
-
-			if (listaUsuarios != null && !listaUsuarios.isEmpty()) {
-				addErrorMessage("Login '" + usuarioSelecionado.getLogin() + "' já é cadastrado.");
-				usuarioSelecionado.setLogin("");
-				usuarioSelecionado.setSenha("");
-				senhaConfirmacao = "";
-				return null;
-			}
-
-			usuarioSelecionado.setDhAtu(new Date());
-			usuarioSelecionado = (Usuario) usuarioService.atualizar(usuarioSelecionado);
-
-			addInfoMessage("Usuário " + usuarioSelecionado.getLogin() + " alterado com sucesso");
 			
-			init();
-
+			if(usuarioSelecionado.getId() != null) {
+				
+				if (usuarioSelecionado.getTipoUsuario() == null || "".equalsIgnoreCase(usuarioSelecionado.getTipoUsuario())) {
+					addErrorMessage("É necessário informar o tipo de usuário.");
+					usuarioSelecionado.setSenha("");
+					senhaConfirmacao = "";
+					return null;
+				}
+	
+				if ("".equalsIgnoreCase(usuarioSelecionado.getLogin()) || "".equalsIgnoreCase(usuarioSelecionado.getSenha())
+						|| "".equalsIgnoreCase(senhaConfirmacao)) {
+					addErrorMessage("Os campos login e senha são obrigatórios. Favor preenchê-los.");
+					usuarioSelecionado.setSenha("");
+					senhaConfirmacao = "";
+					return null;
+				}
+	
+				if (!usuarioSelecionado.getSenha().equals(Md5.getMd5Digest(senhaConfirmacao))) {
+					addErrorMessage("Senha e confirmação se senha não conferem.");
+					usuarioSelecionado.setSenha("");
+					senhaConfirmacao = "";
+					return null;
+				}
+			
+				usuarioSelecionado.setDhAtu(new Date());
+				usuarioSelecionado = (Usuario) usuarioService.atualizar(usuarioSelecionado);
+	
+				addInfoMessage("Usuário " + usuarioSelecionado.getLogin() + " alterado com sucesso");
+				
+				init();
+				
+			} else {
+				addErrorMessage("Erro ao aletrar usuario");				
+			}
+			
 			return null;
 
 		} catch (Exception e) {
