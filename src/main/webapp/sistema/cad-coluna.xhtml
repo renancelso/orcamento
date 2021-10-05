@@ -15,11 +15,47 @@
     <ui:composition template="/template/layout.xhtml">		
         <ui:define name="conteudo">        
         
-            <h:form id="formPrincipal">	            		
+            <h:form id="formPrincipal">	   
+            
+            	<p:messages id="messages" closable="true" showDetail="false">
+          			<p:autoUpdate />
+          		</p:messages>	         		
           		
-          		<b>CAD-COLUNA</b>       
-          		          		
-          		<p:messages id="messages1" closable="true" showDetail="false"/> 	
+          		<p:panel header="Cadastro de Coluna" style="min-width: 515px; font-size: 12px;">
+          		
+          			<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	   
+          						    
+          				    			 
+          			
+          			</h:panelGrid>
+          			
+          			<br/>	
+				    		
+				    <h:panelGrid columns="4" columnClasses="coluna1D,coluna2">	 
+				    	
+				    	<p:spacer width="137" height="0"/>  											    	
+				    	
+				    	<p:commandButton value="CADASTRAR" 			    					
+		               					 onstart="PF('dialogProcessando').show();" 
+		               					 onclick="PF('dialogProcessando').show();"                					 
+		               					 oncomplete="PF('dialogProcessando').hide();"									
+									     onsuccess="PF('dialogProcessando').hide();"
+								 		 onerror="PF('dialogProcessando').hide();"
+								 		 update="@form" id="btnCadastrar"/>
+						
+						<p:spacer width="20" height="0"/>  		 		 
+								 		 
+						<p:commandButton value="EXCLUIR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnExcluir"/>
+							 		 
+					</h:panelGrid>
+          		
+          	 	</p:panel>          	
           		          		
 	            <p:dialog widgetVar="dialogProcessando" modal="true" 
 						  resizable="false;" draggable="false"
@@ -34,6 +70,7 @@
 				</p:dialog>
 				
             </h:form>
+            
         </ui:define>
     </ui:composition>
 </h:body>

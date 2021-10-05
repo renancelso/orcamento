@@ -17,6 +17,11 @@
         <view-id value="/sistema/admin.jsf" />
     </url-mapping>  
     
+    <url-mapping id="cad-usuario">
+        <pattern value="/cad-usuario" />
+        <view-id value="/sistema/cad-usuario.jsf" />
+    </url-mapping>  
+    
     <url-mapping id="cad-servico">
         <pattern value="/cad-servico" />
         <view-id value="/sistema/cad-servico.jsf" />
@@ -25,7 +30,12 @@
     <url-mapping id="cad-coluna">
         <pattern value="/cad-coluna" />
         <view-id value="/sistema/cad-coluna.jsf" />
-    </url-mapping>  
+    </url-mapping> 
+        
+    <url-mapping id="cad-taxas">
+        <pattern value="/cad-taxas" />
+        <view-id value="/sistema/cad-taxas.jsf" />
+    </url-mapping>   
     
     <url-mapping id="cad-valores">
         <pattern value="/cad-valores" />

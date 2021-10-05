@@ -15,11 +15,110 @@
     <ui:composition template="/template/layout.xhtml">		
         <ui:define name="conteudo">        
         
-            <h:form id="formPrincipal">	  
+             <h:form id="formPrincipal">	   
             
-           		<b>CAD-SERVICO</b>          		
-          		          		
-          		<p:messages id="messages1" closable="true" showDetail="false"/> 	
+            	<p:messages id="messages" closable="true" showDetail="false">
+          			<p:autoUpdate />
+          		</p:messages>	         		
+          		
+          		<p:panel header="Cadastro de Servico" style="min-width: 515px; font-size: 12px;">
+          		
+	          		<h:panelGroup rendered="#{servicoControl.novoServico != null and servicoControl.servicoSelecionado == null}">
+	          			
+	          			<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	  
+	          				          						        		
+			        		<h:outputText value="Descrição: "/>	        			
+			        		<h:inputText size="40" value="#{servicoControl.novoServico.descricao}"/>  			        			 
+	          			
+	          			</h:panelGrid>  
+	          			        			
+	          			<br/>
+	          				
+					</h:panelGroup>
+					 
+					<h:panelGroup rendered="#{servicoControl.novoServico == null and servicoControl.servicoSelecionado != null}">
+						
+						<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	            			   
+	          						        		
+			        		<h:outputText value="Descrição "/>	        			
+			        		<h:inputText size="40" value="#{servicoControl.servicoSelecionado.descricao}"/>  			        		 
+	          			
+	          			</h:panelGrid>  
+	          			        			
+	          			<br/>
+					 
+					</h:panelGroup>				 
+				   		
+			    <h:panelGrid columns="6" columnClasses="coluna1D,coluna2">	 
+			    	
+				    <p:spacer width="135" height="0"/>  											    	
+				    	
+				    <p:commandButton value="CADASTRAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnCadastrar"
+								 	 action="#{servicoControl.btnCadastrarNovoServico}"
+								 	 rendered="#{servicoControl.novoServico != null and servicoControl.servicoSelecionado == null}"/>
+								 	 
+					<p:commandButton value="ALTERAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnAlterar"
+								 	 action="#{servicoControl.btnAlterarServico}"								 	 
+								 	 rendered="#{servicoControl.novoServico == null and servicoControl.servicoSelecionado != null}"/>								 	 
+								 	 						
+					<p:spacer width="20" height="0" rendered="#{servicoControl.novoServico == null and servicoControl.servicoSelecionado != null}"/>  		 		 
+								 		 
+					<p:commandButton value="EXCLUIR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnExcluir"
+							 		 action="#{servicoControl.btnExcluirServico}"
+							 		 rendered="#{servicoControl.novoServico == null and servicoControl.servicoSelecionado != null}"/>
+					
+					<p:spacer width="20" height="0"/>  		 		 		 
+							 		 
+					<p:commandButton value="LIMPAR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnLimpar"
+							 		 action="#{servicoControl.init}"/>
+						 		 
+				</h:panelGrid>
+          		
+          	 	</p:panel>   
+          	 	
+          	 	<p:dataTable var="item" value="#{servicoControl.listaServicos}" 
+	            			 selectionMode="single" rowKey="#{item.id}"
+	            			 reflow="true" id="listaServicos"  
+	            			 style="min-width: 250px; font-size: 12px;"
+	            			 paginator="true" widgetVar="listaUsuarios"
+	            			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	            			 currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} de um total de {totalRecords} registros"  
+	       			 		 emptyMessage="Não existem dados cadastrados">
+	       			
+	       			<p:ajax event="rowDblselect" update="@form" 
+	       					oncomplete="window.scrollTo(0,0);"
+	       					listener="#{servicoControl.onRowSelect}" />  
+	       					 
+	       			<p:column headerText="Descrição" style="width: 20%"	       						    
+	       					  filterBy="#{item.descricao}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.descricao}" />
+				    </p:column>						  
+				    								   
+				</p:dataTable>            	
           		          		
 	            <p:dialog widgetVar="dialogProcessando" modal="true" 
 						  resizable="false;" draggable="false"
@@ -34,6 +133,7 @@
 				</p:dialog>
 				
             </h:form>
+            
         </ui:define>
     </ui:composition>
 </h:body>

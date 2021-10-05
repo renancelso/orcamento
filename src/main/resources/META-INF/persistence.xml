@@ -7,8 +7,10 @@
 		<jta-data-source>java:/jdbc/orcamentoDS</jta-data-source>
 		
 		<class>br.com.orcamento.model.Usuario</class>
+		<class>br.com.orcamento.model.Valores</class>	
 		<class>br.com.orcamento.model.Servico</class>
-		<class>br.com.orcamento.model.Valores</class>
+		<class>br.com.orcamento.model.Coluna</class>
+		<class>br.com.orcamento.model.Taxa</class>
 				
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>NONE</shared-cache-mode>			
