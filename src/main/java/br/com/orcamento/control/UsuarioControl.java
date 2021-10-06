@@ -149,7 +149,7 @@ public class UsuarioControl extends BaseControl {
 				init();
 				
 			} else {
-				addErrorMessage("Erro ao aletrar usuario");				
+				addErrorMessage("Erro ao alterar usuario");				
 			}
 			
 			return null;

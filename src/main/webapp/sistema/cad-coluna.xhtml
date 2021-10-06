@@ -15,47 +15,128 @@
     <ui:composition template="/template/layout.xhtml">		
         <ui:define name="conteudo">        
         
-            <h:form id="formPrincipal">	   
+             <h:form id="formPrincipal">	   
             
             	<p:messages id="messages" closable="true" showDetail="false">
           			<p:autoUpdate />
           		</p:messages>	         		
           		
-          		<p:panel header="Cadastro de Coluna" style="min-width: 515px; font-size: 12px;">
+          		<p:panel header="Cadastro de Servico" style="min-width: 515px; font-size: 12px;">
           		
-          			<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	   
-          						    
-          				    			 
-          			
-          			</h:panelGrid>
-          			
-          			<br/>	
-				    		
-				    <h:panelGrid columns="4" columnClasses="coluna1D,coluna2">	 
-				    	
-				    	<p:spacer width="137" height="0"/>  											    	
-				    	
-				    	<p:commandButton value="CADASTRAR" 			    					
-		               					 onstart="PF('dialogProcessando').show();" 
-		               					 onclick="PF('dialogProcessando').show();"                					 
-		               					 oncomplete="PF('dialogProcessando').hide();"									
-									     onsuccess="PF('dialogProcessando').hide();"
-								 		 onerror="PF('dialogProcessando').hide();"
-								 		 update="@form" id="btnCadastrar"/>
+	          		<h:panelGroup rendered="#{colunaControl.novaColuna != null and colunaControl.colunaSelecionada == null}">
+	          			
+	          			<h:panelGrid columns="2" columnClasses="coluna1,coluna2">	 
+	          			
+	          				<h:outputText value="Servico "/>
+          					<h:selectOneMenu converter="ServicoConverter" id="novaColunaServico" 
+          									 value="#{colunaControl.servicoSelecionado}">				
+          						<f:selectItem itemValue="" itemLabel="SELECIONE" noSelectionOption="true" />												
+								<f:selectItems value="#{colunaControl.listaServicos}" var="servico" itemLabel="#{servico.descricao}" />								
+							</h:selectOneMenu> 
+	          				          						        		
+			        		<h:outputText value="Descrição: "/>	        			
+			        		<h:inputText size="40" value="#{colunaControl.novaColuna.descricao}"/>  			        			 
+	          			
+	          			</h:panelGrid>  
+	          			        			
+	          			<br/>
+	          				
+					</h:panelGroup>
+					 
+					<h:panelGroup rendered="#{colunaControl.novaColuna == null and colunaControl.colunaSelecionada != null}">
 						
-						<p:spacer width="20" height="0"/>  		 		 
+						<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	    
+						
+							<h:outputText value="Servico "/>
+          					<h:selectOneMenu converter="ServicoConverter" id="colunaSelecionadaServico" 
+          									 value="#{colunaControl.servicoSelecionado}">		
+          						<f:selectItem itemValue="" itemLabel="SELECIONE" noSelectionOption="true" />														
+								<f:selectItems value="#{colunaControl.listaServicos}" var="servico" itemLabel="#{servico.descricao}" />								
+							</h:selectOneMenu> 
+	          						        		
+			        		<h:outputText value="Descrição "/>	        			
+			        		<h:inputText size="40" value="#{colunaControl.colunaSelecionada.descricao}"/>  			        		 
+	          			
+	          			</h:panelGrid>  
+	          			        			
+	          			<br/>
+					 
+					</h:panelGroup>				 
+				   		
+			    <h:panelGrid columns="6" columnClasses="coluna1D,coluna2">	 
+			    	
+				    <p:spacer width="135" height="0"/>  											    	
+				    	
+				    <p:commandButton value="CADASTRAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnCadastrar"
+								 	 action="#{colunaControl.btnCadastrarNovaColuna}"
+								 	 rendered="#{colunaControl.novaColuna != null and colunaControl.colunaSelecionada == null}"/>
+								 	 
+					<p:commandButton value="ALTERAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnAlterar"
+								 	 action="#{colunaControl.btnAlterarColuna}"								 	 
+								 	 rendered="#{colunaControl.novaColuna == null and colunaControl.colunaSelecionada != null}"/>								 	 
+								 	 						
+					<p:spacer width="20" height="0" rendered="#{colunaControl.novaColuna == null and colunaControl.colunaSelecionada != null}"/>  		 		 
 								 		 
-						<p:commandButton value="EXCLUIR" 	
+					<p:commandButton value="EXCLUIR" 	
 	               					 onstart="PF('dialogProcessando').show();" 
 	               					 onclick="PF('dialogProcessando').show();"                					 
 	               					 oncomplete="PF('dialogProcessando').hide();"									
 								     onsuccess="PF('dialogProcessando').hide();"
 							 		 onerror="PF('dialogProcessando').hide();"
-							 		 update="@form" id="btnExcluir"/>
+							 		 update="@form" id="btnExcluir"
+							 		 action="#{colunaControl.btnExcluirColuna}"
+							 		 rendered="#{colunaControl.novaColuna == null and colunaControl.colunaSelecionada != null}"/>
+					
+					<p:spacer width="20" height="0"/>  		 		 		 
 							 		 
-					</h:panelGrid>
+					<p:commandButton value="LIMPAR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnLimpar"
+							 		 action="#{colunaControl.init}"/>
+						 		 
+				</h:panelGrid>
           		
-          	 	</p:panel>          	
+          	 	</p:panel>   
+          	 	
+          	 	<p:dataTable var="item" value="#{colunaControl.listaColunas}" 
+	            			 selectionMode="single" rowKey="#{item.id}"
+	            			 reflow="true" id="listaServicos"  
+	            			 style="min-width: 250px; font-size: 12px;"
+	            			 paginator="true" widgetVar="listaServicos"
+	            			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	            			 currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} de um total de {totalRecords} registros"  
+	       			 		 emptyMessage="Não existem dados cadastrados">
+	       			
+	       			<p:ajax event="rowDblselect" update="@form" oncomplete="window.scrollTo(0,0);"
+	       					listener="#{colunaControl.onRowSelect}" />  
+	       						       					
+	       			<p:column headerText="Servico" style="width: 20%" filterBy="#{item.servico.descricao}" 
+	       					  filterMatchMode="contains" filterStyle="width: 120px;" sortBy="#{item.servico.descricao}">				       
+				        <h:outputText value="#{item.servico.descricao}" />
+				    </p:column>		
+	       					 
+	       			<p:column headerText="Descrição" style="width: 20%"	sortBy="#{item.descricao}"   						    
+	       					  filterBy="#{item.descricao}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.descricao}" />
+				    </p:column>	
+				    								   
+				</p:dataTable>            	
           		          		
 	            <p:dialog widgetVar="dialogProcessando" modal="true" 
 						  resizable="false;" draggable="false"

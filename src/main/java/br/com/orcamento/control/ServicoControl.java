@@ -126,9 +126,9 @@ public class ServicoControl extends BaseControl {
 	public String btnExcluirServico() {
 		try {	
 			
-			String userRemove = servicoSelecionado.getDescricao();			
+			String servicoRemove = servicoSelecionado.getDescricao();			
 			servicoService.remover(servicoSelecionado);
-			addInfoMessage("Servico " + userRemove + " excluído com sucesso");
+			addInfoMessage("Servico " + servicoRemove + " excluído com sucesso");
 			init();
 			return null;
 

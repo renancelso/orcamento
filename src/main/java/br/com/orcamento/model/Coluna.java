@@ -38,10 +38,10 @@ public class Coluna implements Serializable {
 	@JoinColumn(name="servico")
 	private Servico servico;
 	
-	@Column(name = "tipo", nullable = false, length=255)
+	@Column(name = "tipo", length=255)
 	private String tipo;		
 	
-	@Column(name = "descricao", nullable = false, length=255)
+	@Column(name = "descricao", length=255)
 	private String descricao;
 
  
