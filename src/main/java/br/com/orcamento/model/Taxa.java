@@ -11,10 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 /**
  * @author Renan Celso
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name="taxa")
 public class Taxa implements Serializable {
@@ -39,69 +48,5 @@ public class Taxa implements Serializable {
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dhAtu;				
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getSigla() {
-		return sigla;
-	}
-
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
-	public Date getDhAtu() {
-		return dhAtu;
-	}
-
-	public void setDhAtu(Date dhAtu) {
-		this.dhAtu = dhAtu;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Taxa other = (Taxa) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}	
 		 
 }
