@@ -50,12 +50,14 @@ public class ColunaControl extends BaseControl {
 		colunaSelecionada = null;	
 		
 		listaColunas = new ArrayList<Coluna>();
-		listaColunas = (List<Coluna>) colunaService.consultarTodos(Coluna.class, " order by o.servico.descricao ");		
+		listaColunas = (List<Coluna>) colunaService.consultarTodos(Coluna.class, " order by o.servico.descricao, o.descricao ");		
 		
 		listaServicos = new ArrayList<Servico>();
 		listaServicos = (List<Servico>) colunaService.consultarTodos(Servico.class, " order by o.descricao ");				
 		
-		servicoSelecionado = new Servico();
+		if(servicoSelecionado == null) {
+			servicoSelecionado = new Servico();
+		}
 	}
 	
 	public void onRowSelect(SelectEvent event) {
@@ -75,7 +77,7 @@ public class ColunaControl extends BaseControl {
 			
 			novaColuna.setServico(servicoSelecionado);
 			
-			novaColuna.setTipo(servicoSelecionado.getTipoServico());
+			//novaColuna.setTipo(servicoSelecionado.getTipoServico());
 			
 			if (novaColuna.getDescricao() == null || "".equalsIgnoreCase(novaColuna.getDescricao())) {
 				addErrorMessage("É necessário informar a descricao.");				
@@ -99,7 +101,7 @@ public class ColunaControl extends BaseControl {
 
 		} catch (Exception e) {
 			log.error(e);
-			addErrorMessage("Erro ao cadastrar novo usuário. " + e.getMessage());
+			addErrorMessage("Erro ao cadastrar nova coluna. " + e.getMessage());
 			return null;
 		}
 	}
@@ -117,7 +119,7 @@ public class ColunaControl extends BaseControl {
 				
 				colunaSelecionada.setServico(servicoSelecionado);
 				
-				colunaSelecionada.setTipo(servicoSelecionado.getTipoServico());
+				//colunaSelecionada.setTipo(servicoSelecionado.getTipoServico());
 				
 				if (colunaSelecionada.getDescricao() == null || "".equalsIgnoreCase(colunaSelecionada.getDescricao())) {
 					addErrorMessage("É necessário informar a descricao.");				
