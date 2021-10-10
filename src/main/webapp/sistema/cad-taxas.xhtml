@@ -23,27 +23,67 @@
           		
           		<p:panel header="Cadastro de Taxas" style="min-width: 515px; font-size: 12px;">
           		
-          			<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	   
-          						    
-          				    			 
-          			
+          		<h:panelGroup rendered="#{taxaControl.novaTaxa != null and taxaControl.taxaSelecionada == null}">
+          		<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">
+     		    
+        				<h:outputText value="Sigla: "/>	        			
+	        			<h:inputText size="20" value="#{taxaControl.novaTaxa.sigla}"/>
+	        			         			
+        				<h:outputText value="Descrição: "/>	        			
+	        			<h:inputText size="40" value="#{taxaControl.novaTaxa.descricao}"/>
+	        			         			
+        				<h:outputText value="Valor: "/>	        			
+	        			<h:inputText size="10" value="#{taxaControl.novaTaxa.valor}"/>
+	        			         			
           			</h:panelGrid>
+          		
+          		</h:panelGroup>
+          		
+          		<h:panelGroup rendered="#{taxaControl.novaTaxa == null and taxaControl.taxaSelecionada != null}">
+          		<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">
+     		    
+        				<h:outputText value="Sigla: "/>	        			
+	        			<h:inputText size="20" value="#{taxaControl.taxaSelecionada.sigla}"/>
+	        			         			
+        				<h:outputText value="Descriçãos: "/>	        			
+	        			<h:inputText size="40" value="#{taxaControl.taxaSelecionada.descricao}"/>
+	        			         			
+        				<h:outputText value="Valors: "/>	        			
+	        			<h:inputText size="10" value="#{taxaControl.taxaSelecionada.valor}"/>
+	        			         			
+          			</h:panelGrid>
+          		
+          		</h:panelGroup>
+          		
+          			
           			
           			<br/>	
 				    		
-				    <h:panelGrid columns="4" columnClasses="coluna1D,coluna2">	 
+				    <h:panelGrid columns="6" columnClasses="coluna1D,coluna2">	 
 				    	
-				    	<p:spacer width="137" height="0"/>  											    	
+				    	<p:spacer width="20" height="0"/>  											    	
 				    	
 				    	<p:commandButton value="CADASTRAR" 			    					
-		               					 onstart="PF('dialogProcessando').show();" 
-		               					 onclick="PF('dialogProcessando').show();"                					 
-		               					 oncomplete="PF('dialogProcessando').hide();"									
-									     onsuccess="PF('dialogProcessando').hide();"
-								 		 onerror="PF('dialogProcessando').hide();"
-								 		 update="@form" id="btnCadastrar"/>
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnCadastrar"
+							 		 action="#{taxaControl.cadastrarTaxa}"
+						 	 		 rendered="#{taxaControl.novaTaxa != null and taxaControl.taxaSelecionada == null}"/>
 						
-						<p:spacer width="20" height="0"/>  		 		 
+						<p:commandButton value="ALTERAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnAlterar"
+								 	 action="#{taxaControl.alterarTaxa}"								 	 
+								 	 rendered="#{taxaControl.novaTaxa == null and taxaControl.taxaSelecionada != null}"/>
+						
+						<p:spacer width="20" height="0" rendered="#{taxaControl.novaTaxa == null and taxaControl.taxaSelecionada != null}"/>  		 		 
 								 		 
 						<p:commandButton value="EXCLUIR" 	
 	               					 onstart="PF('dialogProcessando').show();" 
@@ -51,11 +91,59 @@
 	               					 oncomplete="PF('dialogProcessando').hide();"									
 								     onsuccess="PF('dialogProcessando').hide();"
 							 		 onerror="PF('dialogProcessando').hide();"
-							 		 update="@form" id="btnExcluir"/>
+							 		 update="@form" id="btnExcluir"
+							 		 action="#{taxa.excluirTaxa}"
+								 	 rendered="#{taxaControl.novaTaxa == null and taxaControl.taxaSelecionada != null}"/>
+								 	 
+					 	 <p:spacer width="20" height="0"/>  	
+								 	 
+					 	 <p:commandButton value="LIMPAR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnLimpar"
+							 		 action="#{taxaControl.init}"/>
 							 		 
 					</h:panelGrid>
           		
-          	 	</p:panel>          	
+          	 	</p:panel>    
+          	 	
+          	 	<p:dataTable var="item" value="#{taxaControl.listaTaxa}" 
+	            			 selectionMode="single" rowKey="#{item.id}"
+	            			 reflow="true" id="listaTaxas"	   
+	            			 style="min-width: 250px; font-size: 12px;"
+	            			 paginator="true" widgetVar="listaTaxas"
+	            			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	            			 currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} de um total de {totalRecords} registros"  
+	       			 		 emptyMessage="Não existem dados cadastrados">
+	       			
+	       			<p:ajax event="rowDblselect" update="@form" 
+	       					oncomplete="window.scrollTo(0,0);"
+	       					listener="#{taxaControl.onRowSelect}" />  
+	       					 
+	       			<p:column headerText="Sigla" style="width: 20%"	       						    
+	       					  filterBy="#{item.sigla}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.sigla}" />
+				    </p:column>		
+				    
+				    <p:column headerText="Descricao" style="width: 20%"
+				     	      filterBy="#{item.descricao}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.descricao}" />
+				    </p:column>		
+				    
+				    <p:column headerText="Valor" style="width: 20%"
+				     	      filterBy="#{item.valor}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.valorPercent}" />
+				    </p:column>	
+				    
+				 			    
+				    								   
+				</p:dataTable>
+          	 	
+          	 	
+          	 	      	
           		          		
 	            <p:dialog widgetVar="dialogProcessando" modal="true" 
 						  resizable="false;" draggable="false"

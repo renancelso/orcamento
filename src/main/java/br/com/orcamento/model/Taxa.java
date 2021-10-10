@@ -1,7 +1,7 @@
 package br.com.orcamento.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,8 +45,19 @@ public class Taxa implements Serializable {
 	private Double valor;
 			
 	@Column(name = "dh_atu")   
-	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dhAtu;				
-
-		 
+    private LocalDateTime dhAtu;	
+	
+	@Transient
+	private String valorPercent;
+	
+	public String getValorPercent() {
+		
+		if(this.valor != null) {
+			return (this.valor*100) + "%";			
+		}else {
+			return "0%";
+		}
+		
+	}
+			 
 }
