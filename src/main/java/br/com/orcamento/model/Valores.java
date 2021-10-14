@@ -2,7 +2,6 @@ package br.com.orcamento.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,12 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PostLoad;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import br.com.orcamento.model.enums.MoMat;
+import org.hibernate.annotations.Type;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,33 +36,20 @@ public class Valores {
 	private Servico servico;
 	
 	private String escopo;
-	
-	@Basic
-    private int momatValue;
 
-    @Transient
-	private MoMat momat;
-    
+	@OneToOne
+	@JoinColumn(name = "taxa_id")
+	private Taxa taxa;
+	
     private Double custo;
     
     private String unidade;
     
+    @Type(type = "yes_no")
+	@Column(name = "situacao")
 	private Boolean situacao;
 	
 	private LocalDateTime dhAtu;
-	
-	@PostLoad
-    void fillTransient() {
-        if (momatValue > 0) {
-            this.momat = MoMat.of(momatValue);
-        }
-    }
 
-    @PrePersist
-    void fillPersistent() {
-        if (momat != null) {
-            this.momatValue = momat.getCodigo();
-        }
-    }
 
 }

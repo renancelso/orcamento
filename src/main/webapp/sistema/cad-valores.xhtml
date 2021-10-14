@@ -24,26 +24,62 @@
           		<p:panel header="Cadastro de Valores" style="min-width: 515px; font-size: 12px;">
           		
           			<h:panelGrid columns="2" columnClasses="coluna1D,coluna2">	   
-          						    
-          				    			 
+	       				
+	       				<h:outputText value="Servico: "/>	        			
+	       				<h:selectOneMenu converter="ServicoConverter" id="servicoID" 
+          									 value="#{valoresControl.idServico}">
+          						<f:selectItem itemValue="" itemLabel="SELECIONE" noSelectionOption="true" />												
+								<f:selectItems value="#{valoresControl.listaServicos}" var="servico" itemLabel="#{servico.descricao}" />								
+						</h:selectOneMenu> 	
+
+	        			         			
+	       				<h:outputText value="Escopo: "/>	        			
+	        			<h:inputText size="40" value="#{valoresControl.novoValor.escopo}"/>
+	        			         			
+						<h:outputText value="Taxa: "/>	        			
+	       				<h:selectOneMenu id="taxaID" 
+          									 value="#{valoresControl.idTaxa}">
+          						<f:selectItem itemValue="" itemLabel="SELECIONE" noSelectionOption="true" />												
+								<f:selectItems value="#{valoresControl.listaTaxas}" var="taxa" itemLabel="#{taxa.descricao}" />								
+						</h:selectOneMenu> 	
+
+	       				
+	       				<h:outputText value="Custo: "/>	        			
+	        			<h:inputText size="10" value="#{valoresControl.novoValor.custo}"/>
+	       				
+	       				<h:outputText value="Unidade: "/>	        			
+	        			<h:inputText size="10" value="#{valoresControl.novoValor.unidade}"/>
+	        			 
           			
           			</h:panelGrid>
           			
           			<br/>	
 				    		
-				    <h:panelGrid columns="4" columnClasses="coluna1D,coluna2">	 
+				    <h:panelGrid columns="6" columnClasses="coluna1D,coluna2">	 
 				    	
-				    	<p:spacer width="137" height="0"/>  											    	
+				    	<p:spacer width="20" height="0"/>  											    	
 				    	
 				    	<p:commandButton value="CADASTRAR" 			    					
-		               					 onstart="PF('dialogProcessando').show();" 
-		               					 onclick="PF('dialogProcessando').show();"                					 
-		               					 oncomplete="PF('dialogProcessando').hide();"									
-									     onsuccess="PF('dialogProcessando').hide();"
-								 		 onerror="PF('dialogProcessando').hide();"
-								 		 update="@form" id="btnCadastrar"/>
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnCadastrar"
+							 		 action="#{valoresControl.cadastrarValor}"
+						 	 		 rendered="#{valoresControl.novoValor != null and valoresControl.valorSelecionado== null}"/>
 						
-						<p:spacer width="20" height="0"/>  		 		 
+						<p:commandButton value="ALTERAR" 			    					
+		               				 onstart="PF('dialogProcessando').show();" 
+		               				 onclick="PF('dialogProcessando').show();"                					 
+		               				 oncomplete="PF('dialogProcessando').hide();"									
+									 onsuccess="PF('dialogProcessando').hide();"
+								 	 onerror="PF('dialogProcessando').hide();"
+								 	 update="@form" id="btnAlterar"
+								 	 action="#{valoresControl.alterarValor}"								 	 
+								 	 rendered="#{valoresControl.novoValor == null and valoresControl.valorSelecionado != null}"/>
+						
+						<p:spacer width="20" height="0" rendered="#{valoresControl.novoValor == null and valoresControl.valorSelecionado != null}"/>  		 		 
 								 		 
 						<p:commandButton value="EXCLUIR" 	
 	               					 onstart="PF('dialogProcessando').show();" 
@@ -51,11 +87,68 @@
 	               					 oncomplete="PF('dialogProcessando').hide();"									
 								     onsuccess="PF('dialogProcessando').hide();"
 							 		 onerror="PF('dialogProcessando').hide();"
-							 		 update="@form" id="btnExcluir"/>
+							 		 update="@form" id="btnExcluir"
+							 		 action="#{valoresControl.excluirValor}"
+								 	 rendered="#{valoresControl.novoValor== null and valoresControl.valorSelecionado != null}"/>
+								 	 
+					 	 <p:spacer width="20" height="0"/>  	
+								 	 
+					 	 <p:commandButton value="LIMPAR" 	
+	               					 onstart="PF('dialogProcessando').show();" 
+	               					 onclick="PF('dialogProcessando').show();"                					 
+	               					 oncomplete="PF('dialogProcessando').hide();"									
+								     onsuccess="PF('dialogProcessando').hide();"
+							 		 onerror="PF('dialogProcessando').hide();"
+							 		 update="@form" id="btnLimpar"
+							 		 action="#{valoresControl.init}"/>
 							 		 
 					</h:panelGrid>
           		
-          	 	</p:panel>          	
+          	 	</p:panel>
+          	 	
+          	 	<p:dataTable var="item" value="#{valoresControl.listaValores}" 
+	            			 selectionMode="single" rowKey="#{item.id}"
+	            			 reflow="true" id="listaValores"	   
+	            			 style="min-width: 250px; font-size: 12px;"
+	            			 paginator="true" widgetVar="listaValores"
+	            			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	            			 currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} de um total de {totalRecords} registros"  
+	       			 		 emptyMessage="Não existem dados cadastrados">
+	       			
+	       			<p:ajax event="rowDblselect" update="@form" 
+	       					oncomplete="window.scrollTo(0,0);"
+	       					listener="#{valoresControl.onRowSelect}" />  
+	       					 
+	       			<p:column headerText="Servico" style="width: 20%"	       						    
+	       					  filterBy="#{item.servico.descricao}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.servico.descricao}" />
+				    </p:column>		
+				    
+				    <p:column headerText="Escopo" style="width: 20%"
+				     	      filterBy="#{item.escopo}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.escopo}" />
+				    </p:column>		
+				    
+				    <p:column headerText="Taxa" style="width: 20%"
+				     	      filterBy="#{item.taxa.descricao}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.taxa.descricao}" />
+				    </p:column>		
+				    
+				    
+				    <p:column headerText="Custo" style="width: 20%"
+				     	      filterBy="#{item.custo}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.custo}" />
+				    </p:column>	
+				    
+				    <p:column headerText="Unidade" style="width: 20%"
+				     	      filterBy="#{item.unidade}" filterMatchMode="contains" filterStyle="width: 120px;">				       
+				        <h:outputText value="#{item.unidade}" />
+				    </p:column>	
+				    
+				 			    
+				    								   
+				</p:dataTable>
+          	 	          	
           		          		
 	            <p:dialog widgetVar="dialogProcessando" modal="true" 
 						  resizable="false;" draggable="false"
