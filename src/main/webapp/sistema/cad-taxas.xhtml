@@ -134,7 +134,7 @@
 				    
 				    <p:column headerText="Valor" style="width: 20%"
 				     	      filterBy="#{item.valor}" filterMatchMode="contains" filterStyle="width: 120px;">				       
-				        <h:outputText value="#{item.valorPercent}" />
+				        <h:outputText value="#{item.valor}" converter="percentual" />
 				    </p:column>	
 				    
 				 			    
