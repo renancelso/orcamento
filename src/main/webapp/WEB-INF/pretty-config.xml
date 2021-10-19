@@ -26,20 +26,30 @@
         <pattern value="/cad-servico" />
         <view-id value="/sistema/cad-servico.jsf" />
     </url-mapping>  
-    
-    <url-mapping id="cad-coluna">
-        <pattern value="/cad-coluna" />
-        <view-id value="/sistema/cad-coluna.jsf" />
-    </url-mapping> 
         
     <url-mapping id="cad-taxas">
         <pattern value="/cad-taxas" />
         <view-id value="/sistema/cad-taxas.jsf" />
     </url-mapping>   
     
-    <url-mapping id="cad-valores">
-        <pattern value="/cad-valores" />
-        <view-id value="/sistema/cad-valores.jsf" />
+    <url-mapping id="cad-coluna">
+        <pattern value="/cad-coluna" />
+        <view-id value="/sistema/cad-coluna.jsf" />
+    </url-mapping> 
+             
+    <url-mapping id="levantamento">
+        <pattern value="/levantamento" />
+        <view-id value="/sistema/neg-levantamento.jsf" />
+    </url-mapping>  
+    
+    <url-mapping id="orcamento">
+        <pattern value="/orcamento" />
+        <view-id value="/sistema/neg-orcamento.jsf" />
+    </url-mapping> 
+    
+    <url-mapping id="relatorio">
+        <pattern value="/relatorio" />
+        <view-id value="/sistema/neg-relatorio.jsf" />
     </url-mapping>      
               
    	<url-mapping id="logoff">

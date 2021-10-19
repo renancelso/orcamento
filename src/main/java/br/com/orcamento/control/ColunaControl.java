@@ -13,6 +13,7 @@ import org.primefaces.event.SelectEvent;
 
 import br.com.orcamento.model.Coluna;
 import br.com.orcamento.model.Servico;
+import br.com.orcamento.model.Taxa;
 import br.com.orcamento.padrao.BaseControl;
 import br.com.orcamento.service.ColunaServiceLocal;
 
@@ -39,7 +40,11 @@ public class ColunaControl extends BaseControl {
 	
 	private List<Servico> listaServicos;
 	
+	private List<Taxa> listaTaxas;
+	
 	private Servico servicoSelecionado;
+	
+	private Taxa taxaSelecionada;
 	
 	@SuppressWarnings("unchecked")
 	@PostConstruct
@@ -55,9 +60,17 @@ public class ColunaControl extends BaseControl {
 		listaServicos = new ArrayList<Servico>();
 		listaServicos = (List<Servico>) colunaService.consultarTodos(Servico.class, " order by o.descricao ");				
 		
+		listaTaxas = new ArrayList<Taxa>();
+		listaTaxas = (List<Taxa>) colunaService.consultarTodos(Taxa.class, " order by o.descricao ");				
+		
 		if(servicoSelecionado == null) {
 			servicoSelecionado = new Servico();
 		}
+		
+		if(taxaSelecionada == null) {
+			taxaSelecionada = new Taxa();
+		}
+		
 	}
 	
 	public void onRowSelect(SelectEvent event) {
@@ -65,6 +78,7 @@ public class ColunaControl extends BaseControl {
 		colunaSelecionada = new Coluna();
 		colunaSelecionada = (Coluna) event.getObject();  	
 		servicoSelecionado = colunaSelecionada.getServico();
+		taxaSelecionada = colunaSelecionada.getTaxa();
     }
 
 	public String btnCadastrarNovaColuna() {
@@ -76,6 +90,8 @@ public class ColunaControl extends BaseControl {
 			}
 			
 			novaColuna.setServico(servicoSelecionado);
+			
+			novaColuna.setTaxa(taxaSelecionada);
 			
 			//novaColuna.setTipo(servicoSelecionado.getTipoServico());
 			
@@ -111,13 +127,15 @@ public class ColunaControl extends BaseControl {
 		try {
 			
 			if(servicoSelecionado == null || servicoSelecionado.getId() == null) {
-				addErrorMessage("Informe umn servico");
+				addErrorMessage("Informe um servico");
 				return null;				
 			}
 			
 			if(colunaSelecionada.getId() != null) {
 				
 				colunaSelecionada.setServico(servicoSelecionado);
+				
+				colunaSelecionada.setTaxa(taxaSelecionada);
 				
 				//colunaSelecionada.setTipo(servicoSelecionado.getTipoServico());
 				
@@ -208,6 +226,22 @@ public class ColunaControl extends BaseControl {
 
 	public void setServicoSelecionado(Servico servicoSelecionado) {
 		this.servicoSelecionado = servicoSelecionado;
+	}
+
+	public Taxa getTaxaSelecionada() {
+		return taxaSelecionada;
+	}
+
+	public void setTaxaSelecionada(Taxa taxaSelecionada) {
+		this.taxaSelecionada = taxaSelecionada;
+	}
+
+	public List<Taxa> getListaTaxas() {
+		return listaTaxas;
+	}
+
+	public void setListaTaxas(List<Taxa> listaTaxas) {
+		this.listaTaxas = listaTaxas;
 	}
 		
 }

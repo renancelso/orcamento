@@ -32,8 +32,10 @@
         				<h:outputText value="Descrição: "/>	        			
 	        			<h:inputText size="40" value="#{taxaControl.novaTaxa.descricao}"/>
 	        			         			
-        				<h:outputText value="Valor: "/>	        			
-	        			<h:inputText size="10" value="#{taxaControl.novaTaxa.valor}"/>
+        				<h:outputText value="Percentual: "/>	        			
+	        			<h:inputText size="10" value="#{taxaControl.novaTaxa.valor}"
+	        						 onkeypress="return(MascaraMoeda(this, '.', ',', event));"
+		        					 converter="decimal"/>
 	        			         			
           			</h:panelGrid>
           		
@@ -48,8 +50,10 @@
         				<h:outputText value="Descriçãos: "/>	        			
 	        			<h:inputText size="40" value="#{taxaControl.taxaSelecionada.descricao}"/>
 	        			         			
-        				<h:outputText value="Valors: "/>	        			
-	        			<h:inputText size="10" value="#{taxaControl.taxaSelecionada.valor}"/>
+        				<h:outputText value="Percentual: "/>	        			
+	        			<h:inputText size="10" value="#{taxaControl.taxaSelecionada.valor}"
+	        						 onkeypress="return(MascaraMoeda(this, '.', ',', event));"
+		        					 converter="decimal"/>
 	        			         			
           			</h:panelGrid>
           		
@@ -135,14 +139,9 @@
 				    <p:column headerText="Valor" style="width: 20%"
 				     	      filterBy="#{item.valor}" filterMatchMode="contains" filterStyle="width: 120px;">				       
 				        <h:outputText value="#{item.valor}" converter="percentual" />
-				    </p:column>	
-				    
-				 			    
+				    </p:column>					    				 			    
 				    								   
 				</p:dataTable>
-          	 	
-          	 	
-          	 	      	
           		          		
 	            <p:dialog widgetVar="dialogProcessando" modal="true" 
 						  resizable="false;" draggable="false"

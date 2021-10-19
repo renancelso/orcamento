@@ -31,7 +31,6 @@
           						<f:selectItem itemValue="" itemLabel="SELECIONE" noSelectionOption="true" />												
 								<f:selectItems value="#{valoresControl.listaServicos}" var="servico" itemLabel="#{servico.descricao}" />								
 						</h:selectOneMenu> 	
-
 	        			         			
 	       				<h:outputText value="Escopo: "/>	        			
 	        			<h:inputText size="40" value="#{valoresControl.novoValor.escopo}"/>
@@ -45,12 +44,11 @@
 
 	       				
 	       				<h:outputText value="Custo: "/>	        			
-	        			<h:input size="10" value="#{valoresControl.novoValor.custo}"/>
+	        			<h:inputText size="10" value="#{valoresControl.novoValor.custo}"/>
 	       				
 	       				<h:outputText value="Unidade: "/>	        			
 	        			<h:inputText size="10" value="#{valoresControl.novoValor.unidade}"/>
-	        			 
-          			
+	        			           			
           			</h:panelGrid>
           			
           			<br/>	

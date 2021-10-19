@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -36,13 +37,18 @@ public class Coluna implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="servico")
-	private Servico servico;
+	private Servico servico;	
 	
-	@Column(name = "tipo", length=255)
-	private String tipo;		
+	@OneToOne
+	@JoinColumn(name = "taxa")
+	private Taxa taxa;
 	
 	@Column(name = "descricao", length=255)
 	private String descricao;
+	
+	private Double custo;
+	    
+	private String unidade;
 
  
 }

@@ -82,16 +82,10 @@
 													
 								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
 									<li onclick="location.href='#{sessionControl.contexto}/cad-servico'" id="/cad-servico">											
-										<a href="#{sessionControl.contexto}/cad-servico">SERVIÇO</a>
+										<a href="#{sessionControl.contexto}/cad-servico">DISCIPLINA</a>
 									</li>
 								</h:panelGroup>		
-													
-								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
-									<li onclick="location.href='#{sessionControl.contexto}/cad-coluna'" id="/cad-coluna">											
-										<a href="#{sessionControl.contexto}/cad-coluna">COLUNA</a>
-									</li>
-								</h:panelGroup>	
-								
+																		
 								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
 									<li onclick="location.href='#{sessionControl.contexto}/cad-taxas'" id="/cad-taxas">											
 										<a href="#{sessionControl.contexto}/cad-taxas">TAXAS</a>
@@ -99,15 +93,50 @@
 								</h:panelGroup>	
 								
 								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}">
-									<li onclick="location.href='#{sessionControl.contexto}/cad-valores'" id="/cad-valores">											
-										<a href="#{sessionControl.contexto}/cad-valores">VALORES</a>
+									<li onclick="location.href='#{sessionControl.contexto}/cad-coluna'" id="/cad-coluna">											
+										<a href="#{sessionControl.contexto}/cad-coluna">SERVIÇO</a>
 									</li>
-								</h:panelGroup>
+								</h:panelGroup>	
+								
+<!-- 								<h:panelGroup rendered="#{sessionScope['usuarioLogado'].tipoUsuario == 'ADMINISTRADOR'}"> -->
+<!-- 									<li onclick="location.href='#{sessionControl.contexto}/cad-valores'" id="/cad-valores">											 -->
+<!-- 										<a href="#{sessionControl.contexto}/cad-valores">VALORES</a> -->
+<!-- 									</li> -->
+<!-- 								</h:panelGroup> -->
 								
 							</ul>
 							
 						</h:column>
-											
+						
+						<h:column>
+							
+							<li data-toggle="collapse" onclick="modificarIcone(this,'/arquiteto');"
+							    data-target="#arquiteto" class="collapsed active" id="/arquiteto0">		
+								<a href="#" onclick="modificarIcone(this, '/arquiteto');">ARQUITETO									
+									<span class="glyphicon glyphicon-plus"  
+										  id="/arquiteto"
+									      style="float: right; padding: 10px 10px;">
+									</span>									      
+								</a>
+							</li>
+	
+							<ul class="sub-menu collapse" id="arquiteto">	
+															
+								<li onclick="location.href='#{sessionControl.contexto}/levantamento'" id="/levantamento">											
+									<a href="#{sessionControl.contexto}/levantamento">LEVANTAMENTO</a>
+								</li>			
+								
+								<li onclick="location.href='#{sessionControl.contexto}/orcamento'" id="/orcamento">											
+									<a href="#{sessionControl.contexto}/orcamento">ORCAMENTO</a>
+								</li>
+								
+								<li onclick="location.href='#{sessionControl.contexto}/relatorio'" id="/relatorio">											
+									<a href="#{sessionControl.contexto}/relatorio">RELATÓRIO</a>
+								</li>
+								
+							</ul>
+							
+						</h:column>											
 												
 					</ul>
 					
