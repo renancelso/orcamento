@@ -41,7 +41,7 @@
           					<h:selectOneMenu converter="TaxaConverter" id="novaColunaTaxa" 
           									 value="#{colunaControl.taxaSelecionada}">				
           						<f:selectItem itemValue="" itemLabel="SELECIONE" noSelectionOption="true" />												
-								<f:selectItems value="#{colunaControl.listaTaxas}" var="taxa" itemLabel="#{taxa.descricao.toUpperCase()} - #{taxa.valor}%" />								
+								<f:selectItems value="#{colunaControl.listaTaxas}" var="taxa" itemLabel="#{taxa.descricao.toUpperCase()}" />								
 							</h:selectOneMenu> 		
 							
 							<h:outputText value="Custo: "/>	        			

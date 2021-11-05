@@ -95,7 +95,7 @@
 								     onsuccess="PF('dialogProcessando').hide();"
 							 		 onerror="PF('dialogProcessando').hide();"
 							 		 update="@form" id="btnExcluir"
-							 		 action="#{taxa.excluirTaxa}"
+							 		 action="#{taxaControl.excluirTaxa}"
 								 	 rendered="#{taxaControl.novaTaxa == null and taxaControl.taxaSelecionada != null}"/>
 								 	 
 					 	 <p:spacer width="20" height="0"/>  	
