@@ -61,7 +61,22 @@ public class ColunaControl extends BaseControl {
 		listaServicos = (List<Servico>) colunaService.consultarTodos(Servico.class, " order by o.descricao ");				
 		
 		listaTaxas = new ArrayList<Taxa>();
-		listaTaxas = (List<Taxa>) colunaService.consultarTodos(Taxa.class, " order by o.descricao ");				
+		listaTaxas = (List<Taxa>) colunaService.consultarTodos(Taxa.class, " order by o.descricao ");	
+		
+		List<Taxa> listaTaxasRemover = new ArrayList<Taxa>();
+		for (Taxa taxa : listaTaxas) {
+			
+			if("COMISSÃO".equalsIgnoreCase(taxa.getDescricao().toUpperCase())
+					|| "NEGOCIAÇÃO".equalsIgnoreCase(taxa.getDescricao().toUpperCase())
+					|| "NOTA FISCAL".equalsIgnoreCase(taxa.getDescricao().toUpperCase())
+					|| "TAXA MÁQUINA".equalsIgnoreCase(taxa.getDescricao().toUpperCase())
+					) {
+			
+				listaTaxasRemover.add(taxa);
+			}
+		}
+		
+		listaTaxas.removeAll(listaTaxasRemover);
 		
 		if(servicoSelecionado == null) {
 			servicoSelecionado = new Servico();

@@ -48,9 +48,20 @@
 		        			<h:inputText size="10" value="#{colunaControl.novaColuna.custo}"
 		        						 onkeypress="return(MascaraMoeda(this, '.', ',', event));"
 		        						 converter="decimal"/>
-		       				
-		       				<h:outputText value="Unidade: "/>	        			
-		        			<h:inputText size="10" value="#{colunaControl.novaColuna.unidade}"/>        			 
+		       						       				
+		       				<h:outputText value="Unidade: "/>
+          					<h:selectOneMenu value="#{colunaControl.novaColuna.unidade}">				
+          						<f:selectItem itemValue="" itemLabel="SELECIONE" noSelectionOption="true" />
+          						<f:selectItem itemValue="metro" itemLabel="metro"  />
+          						<f:selectItem itemValue="m²" itemLabel="m²"  />	
+          						<f:selectItem itemValue="m³" itemLabel="m³"  />	
+          						<f:selectItem itemValue="unidade" itemLabel="unidade"  />	
+          						<f:selectItem itemValue="ambiente" itemLabel="ambiente"  />	
+          						<f:selectItem itemValue="kit" itemLabel="kit"  />	
+          						<f:selectItem itemValue="diaria" itemLabel="diaria"  />	
+          						<f:selectItem itemValue="saco" itemLabel="saco"  />	
+          						<f:selectItem itemValue="verba" itemLabel="verba"  />	
+							</h:selectOneMenu> 				        				 
 	          			
 	          			</h:panelGrid>  
 	          			        			
